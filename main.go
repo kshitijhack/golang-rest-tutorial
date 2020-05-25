@@ -56,6 +56,17 @@ func getAllEvents(w http.ResponseWriter, r *http.Request) {
 }
 
 
+func getOneEvent(w http.ResponseWriter, r *http.Request) {
+	eventID := mux.Vars(r)["id"]
+
+	for _, singleEvent := range events {
+		if singleEvent.ID == eventID {
+			json.NewEncoder(w).Encode(singleEvent)
+		}
+	}
+}
+
+
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome home!")
 }
