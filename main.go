@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -88,9 +90,13 @@ func deleteEvent(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func homeLink(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome home!")
+}
+
 
 func main() {
-	initEvents()
+//	initEvents()
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/event", createEvent).Methods("POST")
